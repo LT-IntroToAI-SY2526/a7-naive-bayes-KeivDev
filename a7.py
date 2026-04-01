@@ -38,6 +38,21 @@ class BayesClassifier:
             print("Data files not found - running training...")
             self.train()
 
+
+
+
+
+
+
+        
+
+    def read(self) -> None:
+        _, __, files = next(os.walk(self.training_data_directory), (None, None, []))
+        if not files:
+            raise RuntimeError(f"Couldn't find path {self.training_data_directory}")
+        
+        for item in files:
+            print(item)
     def train(self) -> None:
         """Trains the Naive Bayes Sentiment Classifier
 
