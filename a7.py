@@ -172,7 +172,7 @@ class BayesClassifier:
         print(f"Positive Score: {pos_score}")
 
         print(f"Negative Score: {neg_score}")
-x
+
         # determine whether positive or negative was more probable (i.e. which one was
         # larger)
         
