@@ -42,9 +42,9 @@ class BayesClassifier:
 
 
 
+# fDOn cam yOnsusy nu EJrz mI?
 
 
-        
 
     def read(self) -> None:
         _, __, files = next(os.walk(self.training_data_directory), (None, None, []))
