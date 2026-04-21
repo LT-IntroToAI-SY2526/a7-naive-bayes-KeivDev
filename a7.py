@@ -83,8 +83,10 @@ class BayesClassifier:
         # which tells mypy we know better and it shouldn't complain at us on this line):
         for index, filename in enumerate(files, 1): # type: ignore
             print(f"Training on file {index} of {len(files)}")
-            
         #     <the rest of your code for updating frequencies here>
+            text = self.load_file(os.path.join(self.training_data_directory, filename))
+            tokens = self.tokenize(text)
+
 
 
         # we want to fill pos_freqs and neg_freqs with the correct counts of words from
@@ -108,7 +110,9 @@ class BayesClassifier:
         # those tokens. We've asked you to write a function `update_dict` that will make
         # your life easier here. Write that function first then pass it your list of
         # tokens from the file and the appropriate dictionary
-        
+
+
+
 
         # for debugging purposes, it might be useful to print out the tokens and their
         # frequencies for both the positive and negative dictionaries
@@ -158,13 +162,13 @@ class BayesClassifier:
         # of each probability for add one smoothing (so that we never have a probability
         # of 0)
         for token in tokens:
-            pos_freq = self.pos_freqs.get(token, 0) + 1
+            pos_freqs = self.pos_freqs.get(token, 0) + 1
             
-            pos_score = math.log(pos_freq / pos_total)
+            pos_score = math.log(pos_freqs / pos_total)
 
-            neg_freq = self.neg_freqs.get(token, 0) + 1
+            neg_freqs = self.neg_freqs.get(token, 0) + 1
 
-            neg_score = math.log(neg_freq / neg_total)
+            neg_score = math.log(neg_freqs / neg_total)
             
 
         # for debugging purposes, it may help to print the overall positive and negative
@@ -263,7 +267,15 @@ class BayesClassifier:
             freqs - dictionary of frequencies to update
         """
         # TODO: your work here
-        pass  # remove this line once you've implemented this method
+
+        for word in words:
+            if word in freqs:
+                freqs[word] += 1
+            else:
+                freqs[word] = 1
+
+
+        # remove this line once you've implemented this method
 
 
 if __name__ == "__main__":
@@ -305,6 +317,8 @@ if __name__ == "__main__":
     print("\nHere are some sample probabilities.")
     print(f"P('love'| pos) {(b.pos_freqs['love']+1)/pos_denominator}")
     print(f"P('love'| neg) {(b.neg_freqs['love']+1)/neg_denominator}")
+    print(f"P('science'| pos) {(b.pos_freqs['science']+1)/pos_denominator}")
+    print(f"P('science'| neg) {(b.neg_freqs['science']+1)/neg_denominator}")
     print(f"P('terrible'| pos) {(b.pos_freqs['terrible']+1)/pos_denominator}")
     print(f"P('terrible'| neg) {(b.neg_freqs['terrible']+1)/neg_denominator}")
 
@@ -312,7 +326,7 @@ if __name__ == "__main__":
     print("\nThe following should all be positive.")
     print(b.classify('I love computer science'))
     print(b.classify('this movie is fantastic'))
-    # print("\nThe following should all be negative.")
-    # print(b.classify('rainy days are the worst'))
-    # print(b.classify('computer science is terrible'))
+    print("\nThe following should all be negative.")
+    print(b.classify('rainy days are the worst'))
+    print(b.classify('computer science is terrible'))
     # pass
