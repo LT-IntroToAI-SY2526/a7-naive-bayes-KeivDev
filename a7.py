@@ -83,6 +83,7 @@ class BayesClassifier:
         # which tells mypy we know better and it shouldn't complain at us on this line):
         for index, filename in enumerate(files, 1): # type: ignore
             print(f"Training on file {index} of {len(files)}")
+            
         #     <the rest of your code for updating frequencies here>
 
 
@@ -178,7 +179,7 @@ class BayesClassifier:
         
         if pos_score > neg_score:
             return "positive"
-        else
+        else:
             return "negative"
 
         # return a string of "positive" or "negative"
