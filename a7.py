@@ -99,10 +99,10 @@ class BayesClassifier:
         # positive frequency dictionary. If it is neither a postive or negative file,
         # ignore it and move to the next file (this is more just to be safe; we won't
         # test your code with neutral reviews)
-            if filename.startswith(self.pos_file_prefix):
-                self.update_dict(tokens, self.pos_freqs)
-            elif filename.startswith(self.neg_file_prefix):
-                self.update_dict(tokens, self.neg_freqs)
+        if filename.startswith(self.pos_file_prefix):
+            self.update_dict(tokens, self.pos_freqs)
+        elif filename.startswith(self.neg_file_prefix):
+            self.update_dict(tokens, self.neg_freqs)
         
 
         # Updating frequences: to update the frequencies for each file, you need to get
@@ -329,4 +329,14 @@ if __name__ == "__main__":
     print("\nThe following should all be negative.")
     print(b.classify('rainy days are the worst'))
     print(b.classify('computer science is terrible'))
+
+
+    print("\nTests:")
+    print(b.classify("i am very picky about my keyboards but this is the second AULA keyboard i have gotten and i am in love once again. the videos and pictures don’t do it justice it looks and sounds amazing, i love creamy / thocky sounding keyboards and this one is perfect. the resistance on the keys is great, the sound is great, the whole thing is great so i definitely recommend getting this if you’re thinking about it, it is worth the money 100% it is so nice to type on and i use the usb connector ( my cats are going through a wire chewing stage) and its great.  i also love the adjustability of the keyboard, i always have the back end sit up higher, the material is solid and it feels super weighted which i love. there are a bunch of different color options i didnt show all of them in the video but i normally have mine on white or off. "))
+    print(b.classify("amazing excellent fantastic fantastic fantastic fantastic fantastic fantastic fantastic fantastic"))
+    print(b.classify("I can’t wait to see my friend this weekend! It’ll be fun!"))
+    print(b.classify("I am nervous that I won't do well on the AP tests.  I have studied, but I don't think I'll do that well"))
+    print(b.classify("What’s the point of studying hard if climate change is going to kill everyone in a few decades?"))
+    print(b.classify("Why do my USB chargers keep breaking? It’s so annoying."))
+
     # pass
